@@ -4,8 +4,6 @@
 'use strict';
 
 var React = require('react');
-var superagent = require('superagent');
-
 var component = React.createClass({
 
     render: function () {
