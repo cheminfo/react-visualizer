@@ -1,3 +1,4 @@
 dist
 test/built.js
 .idea
+node_modules
