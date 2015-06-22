@@ -35,7 +35,5 @@
     "browserify": "^10.2.4",
     "watchify": "^3.2.2"
   },
-  "dependencies": {
-    "superagent": "^1.2.0"
-  }
+  "dependencies": {}
 }
