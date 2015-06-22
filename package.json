@@ -35,5 +35,8 @@
     "browserify": "^10.2.4",
     "watchify": "^3.2.2"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "files": [
+    "dist/index.js"
+  ]
 }
