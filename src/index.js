@@ -58,15 +58,11 @@ var component = React.createClass({
 
         if (this.props.version !== 'auto') { // Force version to be loaded
             query += '&v=' + version;
-            return (
-                <iframe src={url + '#?' + query} style={style}>
-                    <div/>
-                </iframe>
-                );
         }
-        query += '&loadversion=true';
-        console.log(query);
-        return <iframe src={url + '#?' + query} style={style}/>;
+        else {
+            query += '&loadversion=true';
+        }
+        return <iframe allowFullScreen="true" src={url + '#?' + query} style={style}/>;
     },
 
     getInitialState() {
