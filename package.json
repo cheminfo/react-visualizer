@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "mkdir -p dist && babel src/index.js  --out-file dist/index.js",
+    "build": "babel src --out-dir dist",
     "watch-test": "watchify test/app.js -o test/built.js -t babelify",
     "prepublish": "npm run build"
   },
