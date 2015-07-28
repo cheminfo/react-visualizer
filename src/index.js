@@ -6,7 +6,8 @@
 var React = require('react');
 
 var page = require('./visualizer.js');
-var url;
+var urls = new Map();
+var configs = new Map();
 
 var component = React.createClass({
 
@@ -19,13 +20,24 @@ var component = React.createClass({
             return value + `<script src="${script}"></script>\n`;
         }, '');
         h = h.replace('{{scripts}}', scriptsStr);
-        if(!url) url = URL.createObjectURL(new Blob([h], {type: 'text/html'}));
+
+        if(!urls.has(h)) {
+            urls.set(h, URL.createObjectURL(new Blob([h], {type: 'text/html'})));
+        }
+        var url = urls.get(h);
         var viewURL = this.props.viewURL || '';
         var dataURL = this.props.dataURL || '';
         var config = this.props.config || '';
         var version = this.props.version || 'latest';
         var width = this.props.width || '100%';
         var height = this.props.height || '100%';
+
+        if(typeof config === 'object') {
+            var configJson = JSON.stringify(config);
+            if(!configs.has(configJson))
+                configs.set(configJson, URL.createObjectURL(new Blob([configJson], {type: 'application/json'})));
+            config = configs.get(configJson);
+        }
 
         var style = {
             width: width,
@@ -53,6 +65,7 @@ var component = React.createClass({
                 );
         }
         query += '&loadversion=true';
+        console.log(query);
         return <iframe src={url + '#?' + query} style={style}/>;
     },
 
