@@ -37,6 +37,6 @@
   },
   "dependencies": {},
   "files": [
-    "dist/index.js"
+    "dist"
   ]
 }
