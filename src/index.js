@@ -13,7 +13,7 @@ var component = React.createClass({
     render: function () {
 
         var cdn = this.props.cdn ? this.props.cdn.replace(/\/$/, '') : 'https://www.lactame.com/visualizer';
-        var h = page.replace('{{ cdn }}', '"' + cdn + '"');
+        var h = page.replace('{{ cdn }}', cdn);
         var scripts = this.props.scripts || [];
         var scriptsStr = scripts.reduce(function (value, script) {
             return value + `<script src="${script}"></script>\n`;
