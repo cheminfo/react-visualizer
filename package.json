@@ -7,7 +7,6 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir dist",
     "watch-test": "watchify test/app.js -o test/built.js -t babelify",
     "prepublish": "npm run build"
