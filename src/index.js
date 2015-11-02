@@ -29,8 +29,6 @@ var component = React.createClass({
         var dataURL = this.props.dataURL || '';
         var config = this.props.config || '';
         var version = this.props.version || 'latest';
-        var width = this.props.width || '100%';
-        var height = this.props.height || '100%';
 
         if(typeof config === 'object') {
             var configJson = JSON.stringify(config);
@@ -39,9 +37,9 @@ var component = React.createClass({
             config = configs.get(configJson);
         }
 
-        var style = {
-            width: width,
-            height: height,
+        var style = this.props.style || {
+            width: '100%',
+            height: '100%',
             position: 'absolute',
             border: 'none'
         };
