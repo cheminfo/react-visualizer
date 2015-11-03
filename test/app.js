@@ -1,6 +1,7 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Visualizer from '../src/index';
 
 let element = React.createElement(Visualizer, {
@@ -12,4 +13,4 @@ let element = React.createElement(Visualizer, {
     //dataURL: '',
     //config: ''
 });
-React.render(element, document.getElementById('visualizer'));
+ReactDOM.render(element, document.getElementById('visualizer'));
