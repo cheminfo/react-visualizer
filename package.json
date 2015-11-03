@@ -7,7 +7,7 @@
     "test": "tests"
   },
   "scripts": {
-    "build": "babel src --out-dir dist --presets [ es2015 react ]",
+    "build": "babel src --out-dir dist --presets=es2015,react",
     "watch-test": "watchify test/app.js -o test/built.js -t [ babelify --presets [ es2015 react ] ]",
     "prepublish": "npm run build"
   },
