@@ -17,7 +17,13 @@ var component = React.createClass({
         var h = page.replace(/\{\{ cdn }}/g, cdn);
         var scripts = this.props.scripts || [];
         var scriptsStr = scripts.reduce(function (value, script) {
-            return value + `<script src="${script}"></script>\n`;
+            if (script.url || typeof script === 'string') {
+                return value + `<script src="${script.url || script}"></script>\n`;
+            } else if (script.content) {
+                return value + `<script>${script.content}</script>\n`;
+            } else {
+                throw new Error('script must have url or content');
+            }
         }, '');
         h = h.replace('{{scripts}}', scriptsStr);
 
