@@ -6,8 +6,9 @@ import Visualizer from '../src/index';
 
 let element = React.createElement(Visualizer, {
     //cdn: '//www.lactame.com/visualizer',
+    fallbackVersion: 'latest',
     version: 'auto',
-    viewURL: 'http://couch.cheminfo.org/cheminfo/65f84b002399eb79ec0f8bf145fa63cc/view.json',
+    viewURL: 'http://localhost/localcouch/myviews/1a978de7ca7383a6854f5eb1280b8ce1/view.json',
     scripts: [
         'http://www.lactame.com/lib/ml/HEAD/ml.js',
         {url: 'http://www.lactame.com/lib/semver/4.3.1/semver.js'},

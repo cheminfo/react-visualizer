@@ -1,6 +1,3 @@
-/**
- * @jsx React.DOM
- */
 'use strict';
 
 var React = require('react');
@@ -35,7 +32,7 @@ var component = React.createClass({
         var viewURL = this.props.viewURL || '';
         var dataURL = this.props.dataURL || '';
         var config = this.props.config || '';
-        var version = this.props.version || '{{ fallbackVersion }}';
+        var version = this.props.version || 'latest';
 
         if(typeof config === 'object') {
             var configJson = JSON.stringify(config);
