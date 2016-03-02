@@ -15,7 +15,7 @@ var component = React.createClass({
         var cdn = this.props.cdn ? this.props.cdn.replace(/\/$/, '') : 'https://www.lactame.com/visualizer';
         var fallbackVersion = this.props.fallbackVersion || 'latest';
         var h = page.replace(/\{\{ cdn }}/g, cdn);
-        h = h.replace('{{ fallbackVersion }}', fallbackVersion);
+        h = h.replace(/\{\{ fallbackVersion }}/g, fallbackVersion);
         var scripts = this.props.scripts || [];
         var scriptsStr = scripts.reduce(function (value, script) {
             if (script.url || typeof script === 'string') {
@@ -35,7 +35,7 @@ var component = React.createClass({
         var viewURL = this.props.viewURL || '';
         var dataURL = this.props.dataURL || '';
         var config = this.props.config || '';
-        var version = this.props.version || 'latest';
+        var version = this.props.version || '{{ fallbackVersion }}';
 
         if(typeof config === 'object') {
             var configJson = JSON.stringify(config);
