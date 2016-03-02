@@ -12,11 +12,10 @@ var configs = new Map();
 var component = React.createClass({
 
     render: function () {
-
         var cdn = this.props.cdn ? this.props.cdn.replace(/\/$/, '') : 'https://www.lactame.com/visualizer';
         var fallbackVersion = this.props.fallbackVersion || 'latest';
         var h = page.replace(/\{\{ cdn }}/g, cdn);
-        h = page.replace('{{ fallbackVersion }}', fallbackVersion);
+        h = h.replace('{{ fallbackVersion }}', fallbackVersion);
         var scripts = this.props.scripts || [];
         var scriptsStr = scripts.reduce(function (value, script) {
             if (script.url || typeof script === 'string') {
