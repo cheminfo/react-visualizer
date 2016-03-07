@@ -58,10 +58,8 @@ var component = React.createClass({
         query = query.join('&');
 
 
-        if (this.props.version !== 'auto' || !this.props.viewURL) { // Force version to be loaded
-            console.log('not auto or no viewURL', version);
-            var v = this.props.version === 'auto' ? 'latest' : version;
-            console.log(v);
+        if (version !== 'auto' || !viewURL) { // Force version to be loaded
+            var v = version === 'auto' ? 'latest' : version;
             query += '&v=' + v;
         }
         else {
