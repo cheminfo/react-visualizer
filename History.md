@@ -1,3 +1,13 @@
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/cheminfo/visualizer-react/compare/v1.1.7...v1.1.8) (2016-11-21)
+
+
+### Bug Fixes
+
+* if version is head make it capital letter ([7e98a68](https://github.com/cheminfo/visualizer-react/commit/7e98a68))
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/cheminfo/visualizer-react/compare/v1.1.6...v1.1.7) (2016-09-29)
 
