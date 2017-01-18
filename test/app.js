@@ -8,7 +8,7 @@ let element = React.createElement(Visualizer, {
     //cdn: '//www.lactame.com/visualizer',
     fallbackVersion: 'HEAD',
     version: 'auto',
-    viewURL: 'http://127.0.0.1:5984/myviews/1a978de7ca7383a6854f5eb1280b8ce1/view.json',
+    viewURL: 'https://mydb.cheminfo.org/db/visualizer/entry/a27d59b20df929892c57461a030640a5/view.json',
     scripts: [
         'http://www.lactame.com/lib/ml/HEAD/ml.js',
         {url: 'http://www.lactame.com/lib/semver/4.3.1/semver.js'},
