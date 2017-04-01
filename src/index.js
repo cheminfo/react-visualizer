@@ -1,20 +1,37 @@
 'use strict';
 
 var React = require('react');
+var Component = React.Component;
 var urlNode = require('url');
 
-var page = require('./visualizer.js');
-var urls = new Map();
+var jquery = require('./jquery');
+var loader = require('./loader');
+var page = require('./visualizer-html');
 var configs = new Map();
 
-var component = React.createClass({
+function addScript(doc, script) {
+    const scriptElement = doc.createElement('script');
+    scriptElement.textContent = script;
+    doc.body.appendChild(scriptElement);
+}
 
-    render: function () {
+class ReactVisualizer extends Component {
+    componentDidMount() {
+        const window = this.refs.iframe.contentWindow;
+        window.location = this.refs.iframe.src;
+        const document = window.document;
+        document.body.parentNode.innerHTML = page;
+        debugger;
+        addScript(document, jquery);
+        addScript(document, this.loader);
+    }
+
+    render() {
         var currentHref = window.location.href;
         var cdn = this.props.cdn ? this.props.cdn.replace(/\/$/, '') : 'https://www.lactame.com/visualizer';
         cdn = urlNode.resolve(currentHref, cdn);
         var fallbackVersion = this.props.fallbackVersion || 'latest';
-        var h = page.replace(/\{\{ cdn }}/g, cdn);
+        var h = loader.replace(/\{\{ cdn }}/g, cdn);
         h = h.replace(/\{\{ fallbackVersion }}/g, fallbackVersion);
         var scripts = this.props.scripts || [];
         var scriptsStr = scripts.reduce(function (value, script) {
@@ -31,11 +48,8 @@ var component = React.createClass({
             }
         }, '');
         h = h.replace('{{scripts}}', scriptsStr);
+        this.loader = h;
 
-        if(!urls.has(h)) {
-            urls.set(h, URL.createObjectURL(new Blob([h], {type: 'text/html'})));
-        }
-        var url = urls.get(h);
         var viewURL = this.props.viewURL || '';
         if (viewURL) viewURL = urlNode.resolve(currentHref, viewURL);
         var dataURL = this.props.dataURL || '';
@@ -81,15 +95,8 @@ var component = React.createClass({
         else {
             query += '&loadversion=true';
         }
-        return <iframe allowFullScreen="true" src={url + '#?' + query} style={style}/>;
-    },
-
-    getInitialState() {
-        return {
-            version: null
-        }
+        return <iframe ref="iframe" allowFullScreen="true" src={window.location.origin + '/react-visualizer/index.html#?' + query} style={style}/>;
     }
+}
 
-});
-
-module.exports = component;
+module.exports = ReactVisualizer;
