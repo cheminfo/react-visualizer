@@ -1,16 +1,98 @@
 'use strict';
 
 module.exports = `
-\'use strict\';
+'use strict';
 function checkVersion(versions, version) {
     version = version.toLowerCase();
-    if(version === \'head\') return \'HEAD\';
-    if(version === \'head-min\') return \'HEAD-min\';
-    if(version === \'latest\') return \'latest\';
-    if (!version.startsWith(\'v\')) version = \'v\' + version;
+    if(version === 'head') return 'HEAD';
+    if(version === 'head-min') return 'HEAD-min';
+    if(version === 'latest') return 'latest';
+    if (!version.startsWith('v')) version = 'v' + version;
     var idx = versions.indexOf(version);
     if (idx > -1) return version;
-    else return \'{{ fallbackVersion }}\';
+    else return '{{ fallbackVersion }}';
 }
-(function () {\n        $.getJSON(\'{{ cdn }}\/versions.json\').then(function (versions) {\n            versions = versions || [];\n            versions = versions.map(function(v) {\n                return v.toLowerCase();\n            });\n            \n            var url;\n            var uri = new URI(window.location.href);\n            var search = uri.fragment(true);\n            var version;\n            if (search.viewURL) {\n                url = search.viewURL;\n            }\n            if (search.v) {\n                version = addVisualizer(checkVersion(versions, search.v));\n                return;\n            }\n            if (!version) {\n                version = \'{{ fallbackVersion }}\';\n            }\n            if (!search.loadversion || !url) {\n                addVisualizer(version, search);\n            }\n            else {\n\n                var docUrl = url.replace(\/\\\/view\\.json$\/, \'\');\n                tryAjax(docUrl)\n                        .then(function (data) {\n                            if (!data.version && (!data.$content || !data.$content.version)) throw new Error();\n                            return data;\n                        })\n                        .catch(function () {\n                            return tryAjax(url)\n                        })\n                        .then(function (data) {\n                            addVisualizer(checkVersion(versions, data.version || data.$content.version), search);\n                        })\n                        .catch(function () {\n                            console.error(\'Could not load version\');\n                        });\n            }\n        });\n\n        function addVisualizer(version, search) {\n            var cdn = \'{{ cdn }}\';\n            var visualizer = document.createElement(\'script\');\n            var prefix = cdn;\n            var datamain = prefix + \'\/\' + version + \'\/init\';\n            var requirejs = prefix + \'\/\' + version + \'\/components\/requirejs\/require.js\';\n\n            visualizer.setAttribute(\'data-main\', datamain);\n            visualizer.setAttribute(\'src\', requirejs);\n            document.head.appendChild(visualizer);\n        }\n\n        function tryAjax(url) {\n            return new Promise(function (resolve, reject) {\n                $.ajax({\n                    url: url,\n                    dataType: \'json\',\n                    type: \'GET\',\n                    success: function (data) {\n                        resolve(data);\n                    },\n                    error: function () {\n                        $.ajax({\n                            url: url,\n                            dataType: \'json\',\n                            type: \'GET\',\n                            success: function (data) {\n                                resolve(data);\n                            },\n                            error: function (err) {\n                                console.error(\'load version error\', err);\n                                reject(err);\n                            }\n                        });\n                    },\n                    xhrFields: {withCredentials: true}\n                });\n            });\n        }\n    })();
+(function () {
+    $.getJSON('{{ cdn }}/versions.json').then(function (versions) {
+        versions = versions || [];
+        versions = versions.map(function(v) {
+            return v.toLowerCase();
+        });
+                    
+        var url;
+        var uri = new URI(window.location.href);
+        var search = uri.fragment(true);
+        console.log(window.location);
+        var version;
+        if (search.viewURL) {
+            url = search.viewURL;
+        }
+        if (search.v) {
+            version = addVisualizer(checkVersion(versions, search.v));
+            return;
+        }
+        if (!version) {
+            version = '{{ fallbackVersion }}';
+        }
+        if (!search.loadversion || !url) {
+            addVisualizer(version, search);
+        } else {
+            var docUrl = url.replace(/\\/view\\.json$/, '');
+            tryAjax(docUrl)
+                .then(function (data) {
+                    if (!data.version && (!data.$content || !data.$content.version)) throw new Error();
+                    return data;
+                })
+                .catch(function () {
+                    return tryAjax(url)
+                })
+                .then(function (data) {
+                    addVisualizer(checkVersion(versions, data.version || data.$content.version), search);
+                })
+                .catch(function () {
+                    console.error('Could not load version');
+                });
+            }
+        });
+        
+        function addVisualizer(version, search) {
+            var cdn = '{{ cdn }}';
+            var visualizer = document.createElement('script');
+            var prefix = cdn;
+            var datamain = prefix + '/' + version + '/init';
+            var requirejs = prefix + '/' + version + '/components/requirejs/require.js';
+                        
+            visualizer.setAttribute('data-main', datamain);
+            visualizer.setAttribute('src', requirejs);
+            document.head.appendChild(visualizer);
+        }
+                
+        function tryAjax(url) {
+            return new Promise(function (resolve, reject) {
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'GET',
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function () {
+                    $.ajax({
+                        url: url,
+                        dataType: 'json',
+                        type: 'GET',
+                        success: function (data) {
+                            resolve(data);
+                        },
+                        error: function (err) {
+                            console.error('load version error', err);
+                            reject(err);
+                        }
+                    });
+                },
+                xhrFields: {withCredentials: true}
+            });
+        });
+    }
+})();
 `;

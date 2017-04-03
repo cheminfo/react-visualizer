@@ -1,5 +1,5 @@
 'use strict';
-
+console.log('refresh');
 var React = require('react');
 var Component = React.Component;
 var urlNode = require('url');
@@ -17,13 +17,21 @@ function addScript(doc, script) {
 
 class ReactVisualizer extends Component {
     componentDidMount() {
+        const iframe = this.refs.iframe;
+
+        iframe.src = iframe.contentWindow.location.href + this.query;
+
         const window = this.refs.iframe.contentWindow;
-        window.location = this.refs.iframe.src;
         const document = window.document;
-        document.body.parentNode.innerHTML = page;
-        debugger;
-        addScript(document, jquery);
-        addScript(document, this.loader);
+
+        document.open();
+        document.write(page);
+        document.close();
+
+        iframe.onload = () => {
+            addScript(document, jquery);
+            addScript(document, this.loader);
+        };
     }
 
     render() {
@@ -95,7 +103,10 @@ class ReactVisualizer extends Component {
         else {
             query += '&loadversion=true';
         }
-        return <iframe ref="iframe" allowFullScreen="true" src={window.location.origin + '/react-visualizer/index.html#?' + query} style={style}/>;
+
+        this.query = '?' + query;
+
+        return <iframe ref="iframe" allowFullScreen="true" style={style} />;
     }
 }
 
