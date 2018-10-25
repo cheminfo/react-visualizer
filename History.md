@@ -1,3 +1,18 @@
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/cheminfo/visualizer-react/compare/v1.1.10...v2.0.0) (2018-10-25)
+
+
+### Features
+
+* upgrade to React 16 ([20ded14](https://github.com/cheminfo/visualizer-react/commit/20ded14))
+
+
+### BREAKING CHANGES
+
+* Upgrade to React 16
+
+
+
 <a name="1.1.9"></a>
 ## [1.1.9](https://github.com/cheminfo/visualizer-react/compare/v1.1.8...v1.1.9) (2016-11-21)
 
