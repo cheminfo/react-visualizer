@@ -1,3 +1,13 @@
+<a name="2.0.1"></a>
+## [2.0.1](https://github.com/cheminfo/visualizer-react/compare/v2.0.0...v2.0.1) (2018-10-26)
+
+
+### Bug Fixes
+
+* allowFullScreen is a boolean ([349bdfd](https://github.com/cheminfo/visualizer-react/commit/349bdfd))
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://github.com/cheminfo/visualizer-react/compare/v1.1.10...v2.0.0) (2018-10-25)
 
