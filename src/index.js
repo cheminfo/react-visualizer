@@ -92,7 +92,7 @@ class ReactVisualizer extends React.PureComponent {
       query += '&loadversion=true';
     }
     return (
-      <iframe allowFullScreen="true" src={url + '#?' + query} style={style} />
+      <iframe allowFullScreen src={url + '#?' + query} style={style} />
     );
   }
 }
