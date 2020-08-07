@@ -1,3 +1,6 @@
+// The contents of this file should be copied to visualizer.js as a string if modified
+// It is not used directly in the project
+
 'use strict';
 
 window.onload = function () {
