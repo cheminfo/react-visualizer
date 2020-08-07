@@ -21,7 +21,8 @@ window.onload = function () {
   if (!search.loadversion || !url) {
     addVisualizer(version);
   } else {
-    var docUrl = url.replace(/\/view\.json$/, '');
+    const viewReg = new RegExp('/view.json$');
+    var docUrl = url.replace(viewReg, '');
     tryAjax(docUrl)
       .then(function (data) {
         if (!data.version && (!data.$content || !data.$content.version))
