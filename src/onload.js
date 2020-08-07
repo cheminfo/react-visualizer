@@ -4,22 +4,27 @@
 'use strict';
 
 window.onload = function () {
+  function checkVersion(v) {
+    if (typeof v === 'string') {
+      if (v[0] >= '0' && v[0] <= '9') {
+        return 'v' + v;
+      }
+    }
+    return v;
+  }
   var url;
   var uri = new URI(window.location.href);
   var search = uri.fragment(true);
-  var version;
   if (search.viewURL) {
     url = search.viewURL;
   }
   if (search.v) {
-    version = addVisualizer(search.v);
+    addVisualizer(checkVersion(search.v));
     return;
   }
-  if (!version) {
-    version = '{{ fallbackVersion }}';
-  }
+
   if (!search.loadversion || !url) {
-    addVisualizer(version);
+    addVisualizer('{{ fallbackVersion }}');
   } else {
     const viewReg = new RegExp('/view.json$');
     var docUrl = url.replace(viewReg, '');
@@ -33,7 +38,7 @@ window.onload = function () {
         return tryAjax(url);
       })
       .then(function (data) {
-        addVisualizer(data.version || data.$content.version);
+        addVisualizer(checkVersion(data.version || data.$content.version));
       })
       .catch(function () {
         console.error('Could not load version');
