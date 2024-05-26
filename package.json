@@ -4,7 +4,7 @@
   "description": "The visualizer in a react component",
   "main": "dist/index.js",
   "scripts": {
-    "build": "babel src --out-dir dist --presets=es2015,react",
+    "build": "esbuild 'src/*' --outdir=dist",
     "watch-test": "esbuild test/app.js --bundle --outfile=test/built.js --watch",
     "prepack": "npm run build"
   },
