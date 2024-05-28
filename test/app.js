@@ -2,9 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Visualizer from '../src';
+import {OldReactVisualizer} from '../src';
 
-let element = React.createElement(Visualizer, {
+let element = React.createElement(OldReactVisualizer, {
     //cdn: '//www.lactame.com/visualizer',
     fallbackVersion: 'HEAD',
     version: 'auto',
