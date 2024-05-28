@@ -3,7 +3,7 @@
 const React = require("react");
 
 const makeVisualizerPage = require("./makeVisualizerPage");
-const ReactVisualizer = require("./ReactVisualizer");
+const ReactVisualizer = require("./Visualizer");
 
 const urls = new Map();
 
@@ -11,7 +11,7 @@ function relativeUrl(from, to) {
   return new URL(to, from).href;
 }
 
-class OldReactVisualizer extends React.PureComponent {
+class OldVisualizer extends React.PureComponent {
   render() {
     const currentHref = window.location.href;
 
@@ -55,4 +55,4 @@ class OldReactVisualizer extends React.PureComponent {
   }
 }
 
-module.exports = OldReactVisualizer;
+module.exports = OldVisualizer;

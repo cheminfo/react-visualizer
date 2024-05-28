@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  ReactVisualizer: require('./ReactVisualizer'),
+  Visualizer: require('./Visualizer'),
   makeVisualizerPage: require('./makeVisualizerPage'),
-  OldReactVisualizer: require('./OldReactVisualizer'),
+  OldVisualizer: require('./OldVisualizer'),
 };

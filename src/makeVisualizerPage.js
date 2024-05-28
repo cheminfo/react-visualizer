@@ -1,6 +1,6 @@
 'use strict';
 
-const template = require('./visualizer');
+const template = require('./visualizerTemplate');
 
 /**
  * @typedef {Object} MakeVisualizerPageOptions

@@ -8,7 +8,7 @@ function relativeUrl(from, to) {
   return new URL(to, from).href;
 }
 
-function ReactVisualizer(props) {
+function Visualizer(props) {
   const currentHref = window.location.href;
 
   let viewURL = props.viewURL || '';
@@ -68,4 +68,4 @@ function ReactVisualizer(props) {
   );
 }
 
-module.exports = ReactVisualizer;
+module.exports = React.memo(Visualizer);

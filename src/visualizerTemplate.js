@@ -1,8 +1,10 @@
 'use strict';
 
-const head = `<!DOCTYPE html>
-<html>
+const head = `<!doctype html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <title>Visualizer</title>
     <style>
         #ci-visualizer {
             min-height: 100vh;

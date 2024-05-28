@@ -2,9 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {OldReactVisualizer, ReactVisualizer} from '../src';
+import {OldVisualizer, Visualizer} from '../src';
 
-const oldElement = React.createElement(OldReactVisualizer, {
+const oldElement = React.createElement(OldVisualizer, {
     //cdn: '//www.lactame.com/visualizer',
     fallbackVersion: 'HEAD',
     scripts: [
@@ -19,7 +19,7 @@ const oldElement = React.createElement(OldReactVisualizer, {
     //config: ''
 });
 
-const newElement = React.createElement(ReactVisualizer, {
+const newElement = React.createElement(Visualizer, {
     url: 'visualizer.html',
     version: 'auto',
     viewURL: 'https://myviews.cheminfo.org/db/visualizer/entry/a27d59b20df929892c57461a030640a5/view.json',
