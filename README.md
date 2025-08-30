@@ -4,6 +4,7 @@ The Visualizer in a react component
 ## Properties
 
 * `cdn` - URL of the CDN that will serve the Visualizer. Default: https://www.lactame.com/visualizer
+* `fallbackVersion` - Visualizer fallback version used if no valid version is found. Default: 'latest'.
 * `scripts` - Array of scripts to load in the iframe before the Visualizer
 * `viewURL`
 * `dataURL`
