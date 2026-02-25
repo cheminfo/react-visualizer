@@ -6,7 +6,9 @@ const makeVisualizerPage = require('../src/makeVisualizerPage');
 
 const html = makeVisualizerPage({
   scripts: [
-    { url: 'https://www.lactame.com/lib/jcampconverter/9.6.4/jcampconverter.min.js' },
+    {
+      url: 'https://www.lactame.com/lib/jcampconverter/9.6.4/jcampconverter.min.js',
+    },
     { content: 'console.log("Script from content");' },
   ],
   fallbackVersion: 'HEAD',
