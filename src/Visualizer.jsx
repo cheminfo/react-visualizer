@@ -31,8 +31,8 @@ function Visualizer(props) {
       configs.set(
         configJson,
         URL.createObjectURL(
-          new Blob([configJson], { type: 'application/json' })
-        )
+          new Blob([configJson], { type: 'application/json' }),
+        ),
       );
     config = configs.get(configJson);
   }
@@ -41,16 +41,15 @@ function Visualizer(props) {
     width: '100%',
     height: '100%',
     position: 'absolute',
-    border: 'none'
+    border: 'none',
   };
 
   let query = ['viewURL', viewURL, 'dataURL', dataURL, 'config', config];
   query = query
-    .map(function(v, i) {
-      if (i % 2 === 1)
-        return query[i - 1] + '=' + encodeURIComponent(query[i]);
+    .map(function (v, i) {
+      if (i % 2 === 1) return query[i - 1] + '=' + encodeURIComponent(query[i]);
     })
-    .filter(function(v) {
+    .filter(function (v) {
       return v !== undefined;
     });
   query = query.join('&');

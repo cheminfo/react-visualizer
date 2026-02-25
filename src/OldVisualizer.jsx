@@ -1,9 +1,9 @@
 'use strict';
 
-const React = require("react");
+const React = require('react');
 
-const makeVisualizerPage = require("./makeVisualizerPage");
-const ReactVisualizer = require("./Visualizer");
+const makeVisualizerPage = require('./makeVisualizerPage');
+const ReactVisualizer = require('./Visualizer');
 
 const urls = new Map();
 
@@ -29,7 +29,7 @@ class OldVisualizer extends React.PureComponent {
       } else {
         return script;
       }
-    })
+    });
 
     const page = makeVisualizerPage({
       cdn,
@@ -38,7 +38,10 @@ class OldVisualizer extends React.PureComponent {
     });
 
     if (!urls.has(page)) {
-      urls.set(page, URL.createObjectURL(new Blob([page], { type: 'text/html' })));
+      urls.set(
+        page,
+        URL.createObjectURL(new Blob([page], { type: 'text/html' })),
+      );
     }
     const url = urls.get(page);
 
