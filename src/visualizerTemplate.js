@@ -52,14 +52,19 @@ window.onload = function () {
     fetchUrl(docUrl)
       .then(function (data) {
         if (!data.version && (!data.$content || !data.$content.version))
-          throw new Error();
+          throw new Error('The view document does not have a version');
         return data;
       })
       .catch(function () {
+        // Try fetching the view.json if it did not work with the document
         return fetchUrl(url);
       })
       .then(function (data) {
-        addVisualizer(checkVersion(data.version || data.$content.version));
+        let version = checkVersion(data.version || data.$content.version);
+        if(loadversion === 'latest-major') {
+          version = version.replace(/^(v\\d+).*$/, '$1-latest');
+        }
+        addVisualizer(version);
       })
       .catch(function () {
         console.error('Could not load version');
