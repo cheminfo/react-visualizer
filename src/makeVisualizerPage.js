@@ -4,9 +4,10 @@ const template = require('./visualizerTemplate');
 
 /**
  * @typedef {Object} MakeVisualizerPageOptions
- * @property {string} [cdn]
- * @property {string} [fallbackVersion]
- * @property {Array<{url: string}|{content: string}>} [scripts]
+ * @property {string} - cdn URL for static visualizer assets
+ * @property {string} - Fallback version of the visualizer to use if it is not specified in the serach params and not loaded from the view.
+ * @property {'fragment' | 'query'} - queryType
+ * @property {Array<{url: string}|{content: string}>} - Scripts content or url to inject into the page.
  */
 
 /**
@@ -17,10 +18,11 @@ function makeVisualizerPage(options = {}) {
   const {
     cdn = 'https://www.lactame.com/visualizer',
     fallbackVersion = 'latest',
+    queryType = 'fragment',
     scripts = [],
   } = options;
 
-  const scriptsStr = scripts.reduce(function(value, script) {
+  const scriptsStr = scripts.reduce(function (value, script) {
     if (script.url) {
       return value + `<script src="${script.url}"></script>\n`;
     } else if (script.content) {
@@ -33,7 +35,8 @@ function makeVisualizerPage(options = {}) {
   return template
     .replaceAll('{{ cdn }}', cdn)
     .replaceAll('{{ fallbackVersion }}', fallbackVersion)
-    .replace('{{ scripts }}', scriptsStr);
+    .replace('{{ scripts }}', scriptsStr)
+    .replace('{{ queryType }}', queryType);
 }
 
 module.exports = makeVisualizerPage;
