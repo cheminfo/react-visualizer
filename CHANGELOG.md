@@ -1,0 +1,12 @@
+# Changelog
+
+## [4.0.0](https://github.com/cheminfo/react-visualizer/compare/v3.0.1...v4.0.0) (2026-02-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* stop supporting very old browsers which do not support fetch or URL
+
+### Features
+
+* new load strategy latest-major ([#21](https://github.com/cheminfo/react-visualizer/issues/21)) ([eb93b08](https://github.com/cheminfo/react-visualizer/commit/eb93b08b4a695330561d31f1ed665226cfb8cc16))
