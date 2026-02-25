@@ -38,13 +38,13 @@ window.onload = function () {
   const search = new URLSearchParams(query.startsWith("#") ? query.slice(1) : query);
   const url = search.get('viewURL');
   const v = search.get('v');
-  const loadversion = search.get('loadversion');
+  const loadversion = search.get('loadversion') || '{{ loadversion }}';
   if (v) {
     addVisualizer(checkVersion(v));
     return;
   }
 
-  if (!loadversion || !url) {
+  if (loadversion === 'none' || !url) {
     addVisualizer('{{ fallbackVersion }}');
   } else {
     const viewReg = new RegExp('/view.json$');

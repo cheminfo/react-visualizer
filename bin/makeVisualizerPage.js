@@ -13,6 +13,9 @@ const { values: args } = parseArgs({
     fallbackVersion: {
       type: 'string',
     },
+    loadversion: {
+      type: 'string',
+    },
     cdn: {
       type: 'string',
     },
@@ -44,6 +47,13 @@ Options:
   --fallbackVersion <string>
       Visualizer version to use if it is not specified in the search url and not loaded from the view
 
+  --loadversion <'none' | 'exact' | 'major-latest'>
+      What version to load based on the version referenced by the view.
+        'exact': load exactly the version of the view.
+        'latest-major': use the major version of the view, but its latest version. 
+        'none': do not use the view to decide which version to load.
+      Default: 'none'
+      
   --cdn <string>
       CDN base URL for visualizer assets
 
@@ -51,8 +61,10 @@ Options:
       Output file path to which to write the html file
       Default: visualizer.html
 
-  --queryType <string>
-      Where the search parameters should be read from: 'fragment' or 'query'
+  --queryType <'fragment' | 'query'>
+      Where the search parameters should be read from.
+        'query': Uses the regular query string of the URL
+        'fragment': Uses the fragment identifier (aka hash) of the URL as query string
       Default: query
 `);
 }

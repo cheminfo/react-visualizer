@@ -6,6 +6,7 @@ const template = require('./visualizerTemplate');
  * @typedef {Object} MakeVisualizerPageOptions
  * @property {string} - cdn URL for static visualizer assets
  * @property {string} - Fallback version of the visualizer to use if it is not specified in the serach params and not loaded from the view.
+ * @property {'exact' | 'latest-major' | 'none'} - How to load the visualizer version based on the version of the view. 'exact': load exactly the version of the view. 'major-latest': use the major version of the view, but its latest version. undefined: do not use the view to decide which version to load.
  * @property {'fragment' | 'query'} - queryType
  * @property {Array<{url: string}|{content: string}>} - Scripts content or url to inject into the page.
  */
@@ -19,9 +20,12 @@ function makeVisualizerPage(options = {}) {
     cdn = 'https://www.lactame.com/visualizer',
     fallbackVersion = 'latest',
     queryType = 'fragment',
+    loadversion = 'none',
     scripts = [],
   } = options;
 
+  validateQueryType(queryType);
+  validateLoadVersion(loadversion);
   const scriptsStr = scripts.reduce(function (value, script) {
     if (script.url) {
       return value + `<script src="${script.url}"></script>\n`;
@@ -36,7 +40,26 @@ function makeVisualizerPage(options = {}) {
     .replaceAll('{{ cdn }}', cdn)
     .replaceAll('{{ fallbackVersion }}', fallbackVersion)
     .replace('{{ scripts }}', scriptsStr)
-    .replace('{{ queryType }}', queryType);
+    .replace('{{ queryType }}', queryType)
+    .replace('{{ loadversion }}', loadversion);
 }
 
 module.exports = makeVisualizerPage;
+
+const validLoadversion = ['none', 'exact', 'latest-major'];
+function validateLoadVersion(loadversion) {
+  if (!validLoadversion.includes(loadversion)) {
+    throw new Error(
+      `Invalid "loadversion" parameter: ${loadversion}. Allowed values: ${validLoadversion.join(', ')}`,
+    );
+  }
+}
+
+const validQueryType = ['fragment', 'query'];
+function validateQueryType(queryType) {
+  if (!validQueryType.includes(queryType)) {
+    throw new Error(
+      `Invalid "queryType" parameter: ${queryType}, allowed values: ${validQueryType.join(', ')}`,
+    );
+  }
+}
