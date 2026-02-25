@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.1.0](https://github.com/cheminfo/react-visualizer/compare/v4.0.0...v4.1.0) (2026-02-25)
+
+
+### Features
+
+* decide of a default loadversion parameter when making the visualizer page ([#25](https://github.com/cheminfo/react-visualizer/issues/25)) ([e150ef3](https://github.com/cheminfo/react-visualizer/commit/e150ef312f18f9980aa45c4c7c1885c95a223e65))
+
 ## [4.0.0](https://github.com/cheminfo/react-visualizer/compare/v3.0.1...v4.0.0) (2026-02-25)
 
 
