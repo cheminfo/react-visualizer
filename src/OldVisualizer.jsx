@@ -14,14 +14,24 @@ function relativeUrl(from, to) {
 class OldVisualizer extends React.PureComponent {
   render() {
     const currentHref = window.location.href;
+    const {
+      cdn,
+      viewURL,
+      dataURL,
+      config,
+      style,
+      scripts = [],
+      loadversion,
+      fallbackVersion,
+      queryParameters,
+    } = this.props;
 
-    let cdn = this.props.cdn
-      ? this.props.cdn.replace(/\/$/, '')
+    let finalCDN = cdn
+      ? cdn.replace(/\/$/, '')
       : 'https://www.lactame.com/visualizer';
-    cdn = relativeUrl(currentHref, cdn);
+    finalCDN = relativeUrl(currentHref, finalCDN);
 
-    let scripts = this.props.scripts || [];
-    scripts = scripts.map((script) => {
+    const finalScripts = scripts.map((script) => {
       if (script.url || typeof script === 'string') {
         return {
           url: relativeUrl(currentHref, script.url || script),
@@ -32,9 +42,10 @@ class OldVisualizer extends React.PureComponent {
     });
 
     const page = makeVisualizerPage({
-      cdn,
-      fallbackVersion: this.props.fallbackVersion,
-      scripts,
+      cdn: finalCDN,
+      scripts: finalScripts,
+      loadversion,
+      fallbackVersion,
     });
 
     if (!urls.has(page)) {
@@ -48,11 +59,11 @@ class OldVisualizer extends React.PureComponent {
     return (
       <ReactVisualizer
         url={url}
-        viewURL={this.props.viewURL}
-        dataURL={this.props.dataURL}
-        config={this.props.config}
-        version={this.props.version}
-        style={this.props.style}
+        viewURL={viewURL}
+        dataURL={dataURL}
+        config={config}
+        queryParameters={queryParameters}
+        style={style}
       />
     );
   }

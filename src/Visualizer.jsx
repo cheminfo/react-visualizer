@@ -8,15 +8,33 @@ function relativeUrl(from, to) {
   return new URL(to, from).href;
 }
 
+/**
+ * @typedef {Object} VisualizerProps
+ * @property {string} url - The URL of the visualizer iframe.
+ * @property {string} viewURL - The view to load. Set as a query param on the visualizer iframe URL.
+ * @property {string} dataURL - The view to load. Set as a query param on the visualizer iframe URL.
+ * @property {Object} config - The visualizer config object. URLs in the object are normalized to be absolute. Serialized as JSON and converted to a blob URL which is passed as a query param to the visualizer iframe URL.
+ * @property {Record<string, string>} queryParameters - Key-value pairs to add to the query string of the visualizer iframe URL.
+ * @property {import('react').CSSProperties} - CSS properties to style the iframe.
+ */
+
+/**
+ * @param {VisualizerProps} props
+ * @returns {JSX.Element}
+ */
 function Visualizer(props) {
   const currentHref = window.location.href;
 
   let viewURL = props.viewURL || '';
-  if (viewURL) viewURL = relativeUrl(currentHref, viewURL);
   let dataURL = props.dataURL || '';
-  if (dataURL) dataURL = relativeUrl(currentHref, dataURL);
   let config = props.config || '';
-  const version = props.version || 'latest';
+
+  if (viewURL) {
+    viewURL = relativeUrl(currentHref, viewURL);
+  }
+  if (dataURL) {
+    dataURL = relativeUrl(currentHref, dataURL);
+  }
 
   if (typeof config === 'object' && config !== null) {
     if (config.header && config.header.elements) {
@@ -44,26 +62,26 @@ function Visualizer(props) {
     border: 'none',
   };
 
-  let query = ['viewURL', viewURL, 'dataURL', dataURL, 'config', config];
-  query = query
-    .map(function (v, i) {
-      if (i % 2 === 1) return query[i - 1] + '=' + encodeURIComponent(query[i]);
-    })
-    .filter(function (v) {
-      return v !== undefined;
-    });
-  query = query.join('&');
+  const search = new URLSearchParams();
+  const query = {
+    viewURL,
+    dataURL,
+    config,
+    ...props.queryParameters,
+  };
 
-  if (version !== 'auto' || !viewURL) {
-    // Force version to be loaded
-    const v = version === 'auto' ? 'latest' : version;
-    query += '&v=' + v;
-  } else {
-    query += '&loadversion=true';
+  for (let [key, value] of Object.entries(query)) {
+    if (value) {
+      search.set(key, value);
+    }
   }
 
   return (
-    <iframe allowFullScreen src={props.url + '#?' + query} style={style} />
+    <iframe
+      allowFullScreen
+      src={props.url + '#?' + search.toString()}
+      style={style}
+    />
   );
 }
 
