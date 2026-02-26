@@ -40,6 +40,12 @@ const { values: args } = parseArgs({
       type: 'string',
       default: 'query',
     },
+    viewURL: {
+      type: 'string',
+    },
+    configURL: {
+      type: 'string',
+    },
     config: {
       type: 'string',
     },
@@ -95,6 +101,12 @@ Options:
 
   --scriptUrl <string>
       Script source url. You can specify this option multiple times to include multiple URLs.
+      
+  --viewURL
+      URL to pass to the visualizer's data-ci-view attribute.
+      
+  --configURL
+      URL to pass to the visualizer's data-ci-config attribute.
 
   --out <string>
       Output file path to which to write the html file
@@ -108,7 +120,7 @@ Options:
       
   --config <string>
       Path to a configuration file.
-      Via the configuration file, you can specify additional options which should be passed to makeVisualizerPage generator.
+      The configuration file is read as JSON and passed as such to the makeVisualizerPage function.
       The "out" parameter must always be specified via the command line options.
 `);
 }

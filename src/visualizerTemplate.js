@@ -36,7 +36,7 @@ window.onload = function () {
   const queryType = '{{ queryType }}';
   const query = queryType === 'fragment' ? window.location.hash : window.location.search;
   const search = new URLSearchParams(query.startsWith("#") ? query.slice(1) : query);
-  const url = search.get('viewURL');
+  const viewURL = search.get('viewURL');
   const v = search.get('v');
   const loadversion = search.get('loadversion') || '{{ loadversion }}';
   const fallbackVersion = search.get('fallbackVersion') || '{{ fallbackVersion }}';
@@ -45,11 +45,11 @@ window.onload = function () {
     return;
   }
 
-  if (loadversion === 'none' || !url) {
+  if (loadversion === 'none' || !viewURL) {
     addVisualizer(fallbackVersion);
   } else {
     const viewReg = new RegExp('/view.json$');
-    const docUrl = url.replace(viewReg, '');
+    const docUrl = viewURL.replace(viewReg, '');
     fetchUrl(docUrl)
       .then(function (data) {
         if (!data.version && (!data.$content || !data.$content.version))
@@ -58,7 +58,7 @@ window.onload = function () {
       })
       .catch(function () {
         // Try fetching the view.json if it did not work with the document
-        return fetchUrl(url);
+        return fetchUrl(viewURL);
       })
       .then(function (data) {
         let version = checkVersion(data.version || data.$content.version);
@@ -74,11 +74,19 @@ window.onload = function () {
 
   function addVisualizer(version) {
     const cdn = '{{ cdn }}';
+    const viewURL = '{{ viewURL }}';
+    const configURL = '{{ configURL }}';
     const visualizer = document.createElement('script');
     const datamain = cdn + '/' + version + '/init';
     const requirejs = cdn + '/' + version + '/components/requirejs/require.js';
 
     visualizer.setAttribute('data-main', datamain);
+    if(viewURL) {
+      visualizer.setAttribute('data-ci-view', viewURL);
+    }
+    if(configURL) {
+      visualizer.setAttribute('data-ci-config', configURL);
+    }
     visualizer.setAttribute('src', requirejs);
     document.head.appendChild(visualizer);
   }
