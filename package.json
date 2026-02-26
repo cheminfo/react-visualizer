@@ -2,16 +2,16 @@
   "name": "react-visualizer",
   "version": "5.0.0",
   "description": "The visualizer in a react component",
-  "main": "dist/index.js",
+  "main": "dist/src/index.js",
+  "bin": {
+    "makeVisualizerPage": "./dist/bin/makeVisualizerPage.js"
+  },
   "scripts": {
-    "build": "esbuild 'src/*' --outdir=dist",
+    "build": "esbuild 'src/*' 'bin/*' --outdir=dist",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
     "watch-test": "esbuild test/app.js --bundle --outfile=test/built.js --watch",
     "prepack": "npm run build"
-  },
-  "bin": {
-    "makeVisualizerPage": "./bin/makeVisualizerPage.js"
   },
   "repository": {
     "type": "git",
