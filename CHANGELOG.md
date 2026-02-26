@@ -1,5 +1,21 @@
 # Changelog
 
+## [5.0.0](https://github.com/cheminfo/react-visualizer/compare/v4.1.0...v5.0.0) (2026-02-26)
+
+
+### ⚠ BREAKING CHANGES
+
+* the `version` prop was removed. Either construct visualizer.html page with appropriate `loadversion` and `fallbackVersion` options, or use the new `queryParameters` prop to customize the behaviour.
+
+### Features
+
+* rework Visualizer components API ([0ab1d4c](https://github.com/cheminfo/react-visualizer/commit/0ab1d4cb25238a8010941dc6682a90e58fcc6254))
+
+
+### Bug Fixes
+
+* make sure makeVisualizerPage can be used properly with npx ([f44b6a7](https://github.com/cheminfo/react-visualizer/commit/f44b6a7791bd6419e961366aa52ed61d113a3698))
+
 ## [4.1.0](https://github.com/cheminfo/react-visualizer/compare/v4.0.0...v4.1.0) (2026-02-25)
 
 
