@@ -12,6 +12,10 @@ CLI example:
 npx react-visualizer makeVisualizerPage --help
 ```
 
+Dev example:
+
+node bin/makeVisualizerPage.js --config=config.example.json
+
 Node.js API: see options of `makeVisualizerPage` function.
 
 ## Visualizer

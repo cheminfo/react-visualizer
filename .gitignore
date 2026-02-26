@@ -2,3 +2,4 @@ dist
 test/built.js
 .idea
 node_modules
+/visualizer.html

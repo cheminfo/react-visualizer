@@ -79,13 +79,16 @@ window.onload = function () {
     const visualizer = document.createElement('script');
     const datamain = cdn + '/' + version + '/init';
     const requirejs = cdn + '/' + version + '/components/requirejs/require.js';
+    
+    const visualizerDiv = document.getElementById('ci-visualizer');
+    
 
     visualizer.setAttribute('data-main', datamain);
     if(viewURL) {
-      visualizer.setAttribute('data-ci-view', viewURL);
+      visualizerDiv.setAttribute('data-ci-view', viewURL);
     }
     if(configURL) {
-      visualizer.setAttribute('data-ci-config', configURL);
+      visualizerDiv.setAttribute('data-ci-config', configURL);
     }
     visualizer.setAttribute('src', requirejs);
     document.head.appendChild(visualizer);

@@ -1,0 +1,16 @@
+{
+  "modules": {
+    "folders": ["modules/types"]
+  },
+  "header": {
+    "height": "30px",
+    "elements": [
+      {
+        "type": "versionselector",
+        "label": "Switch version",
+        "url": "https://www.lactame.com/visualizer/versions.json",
+        "minVersion": "2.155.0"
+      }
+    ]
+  }
+}
