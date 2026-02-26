@@ -46,7 +46,7 @@ const { values: args } = parseArgs({
   },
 });
 
-const { help, config, scriptUrl, ...options } = args;
+const { help, config, scriptUrl = [], ...options } = args;
 
 const scripts = scriptUrl.map((url) => ({
   url,
