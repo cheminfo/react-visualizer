@@ -35,7 +35,7 @@ function Visualizer(props) {
   }
 
   if (typeof config !== 'string') {
-    const config = createBlobConfig(config);
+    config = createBlobConfig(config);
   }
 
   const style = props.style || {
