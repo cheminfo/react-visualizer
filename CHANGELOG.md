@@ -1,5 +1,17 @@
 # Changelog
 
+## [5.3.0](https://github.com/cheminfo/react-visualizer/compare/v5.2.1...v5.3.0) (2026-02-26)
+
+
+### Features
+
+* allow config to be passed as a URL or as an object ([138b0bc](https://github.com/cheminfo/react-visualizer/commit/138b0bc8cbd81e141f127664d3d9e58652cb5678))
+
+
+### Bug Fixes
+
+* rename makeVisualizerOption from configURL to config. This is how the property is named in the visualizer. ([138b0bc](https://github.com/cheminfo/react-visualizer/commit/138b0bc8cbd81e141f127664d3d9e58652cb5678))
+
 ## [5.2.1](https://github.com/cheminfo/react-visualizer/compare/v5.2.0...v5.2.1) (2026-02-26)
 
 
