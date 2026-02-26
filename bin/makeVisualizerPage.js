@@ -3,8 +3,16 @@
 const { parseArgs } = require('node:util');
 const makeVisualizerPage = require('../src/makeVisualizerPage');
 const { writeFileSync } = require('node:fs');
+const assert = require('node:assert');
+
+let argv = process.argv.slice(2);
+const startIndex = argv.findIndex((arg) => arg === 'makeVisualizerPage');
+if (startIndex > -1) {
+  argv = argv.slice(startIndex + 1);
+}
 
 const { values: args } = parseArgs({
+  args: argv,
   options: {
     help: {
       type: 'boolean',
