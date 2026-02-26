@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.0.1](https://github.com/cheminfo/react-visualizer/compare/v5.0.0...v5.0.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* properly publish bin ([e78980d](https://github.com/cheminfo/react-visualizer/commit/e78980d801e1a28d4de43e030d192136be500770))
+
 ## [5.0.0](https://github.com/cheminfo/react-visualizer/compare/v4.1.0...v5.0.0) (2026-02-26)
 
 
