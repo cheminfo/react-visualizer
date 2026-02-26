@@ -11,7 +11,8 @@ const html = makeVisualizerPage({
     },
     { content: 'console.log("Script from content");' },
   ],
-  fallbackVersion: 'HEAD',
+  fallbackVersion: 'latest',
+  loadversion: 'exact',
 });
 
 fs.writeFileSync(__dirname + '/visualizer.html', html);

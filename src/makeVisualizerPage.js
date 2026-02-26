@@ -4,11 +4,11 @@ const template = require('./visualizerTemplate');
 
 /**
  * @typedef {Object} MakeVisualizerPageOptions
- * @property {string} - cdn URL for static visualizer assets
- * @property {string} - Fallback version of the visualizer to use if it is not specified in the serach params and not loaded from the view.
- * @property {'exact' | 'latest-major' | 'none'} - How to load the visualizer version based on the version of the view. 'exact': load exactly the version of the view. 'major-latest': use the major version of the view, but its latest version. undefined: do not use the view to decide which version to load.
- * @property {'fragment' | 'query'} - queryType
- * @property {Array<{url: string}|{content: string}>} - Scripts content or url to inject into the page.
+ * @property {string} cdn - cdn URL for static visualizer assets
+ * @property {string} fallbackVersion - Fallback version of the visualizer to use if it is not specified in the serach params and not loaded from the view.
+ * @property {'exact' | 'latest-major' | 'none'} loadversion - How to load the visualizer version based on the version of the view. 'exact': load exactly the version of the view. 'major-latest': use the major version of the view, but its latest version. undefined: do not use the view to decide which version to load.
+ * @property {'fragment' | 'query'} queryType - Wether to use a regular query string or to put the query string in a fragment.
+ * @property {Array<{url: string}|{content: string}>} scripts - Scripts content or url to inject into the page.
  */
 
 /**
@@ -37,8 +37,8 @@ function makeVisualizerPage(options = {}) {
   }, '');
 
   return template
-    .replaceAll('{{ cdn }}', cdn)
-    .replaceAll('{{ fallbackVersion }}', fallbackVersion)
+    .replace('{{ cdn }}', cdn)
+    .replace('{{ fallbackVersion }}', fallbackVersion)
     .replace('{{ scripts }}', scriptsStr)
     .replace('{{ queryType }}', queryType)
     .replace('{{ loadversion }}', loadversion);

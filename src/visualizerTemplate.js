@@ -39,16 +39,17 @@ window.onload = function () {
   const url = search.get('viewURL');
   const v = search.get('v');
   const loadversion = search.get('loadversion') || '{{ loadversion }}';
+  const fallbackVersion = search.get('fallbackVersion') || '{{ fallbackVersion }}';
   if (v) {
     addVisualizer(checkVersion(v));
     return;
   }
 
   if (loadversion === 'none' || !url) {
-    addVisualizer('{{ fallbackVersion }}');
+    addVisualizer(fallbackVersion);
   } else {
     const viewReg = new RegExp('/view.json$');
-    var docUrl = url.replace(viewReg, '');
+    const docUrl = url.replace(viewReg, '');
     fetchUrl(docUrl)
       .then(function (data) {
         if (!data.version && (!data.$content || !data.$content.version))
@@ -72,11 +73,10 @@ window.onload = function () {
   }
 
   function addVisualizer(version) {
-    var cdn = '{{ cdn }}';
-    var visualizer = document.createElement('script');
-    var prefix = cdn;
-    var datamain = prefix + '/' + version + '/init';
-    var requirejs = prefix + '/' + version + '/components/requirejs/require.js';
+    const cdn = '{{ cdn }}';
+    const visualizer = document.createElement('script');
+    const datamain = cdn + '/' + version + '/init';
+    const requirejs = cdn + '/' + version + '/components/requirejs/require.js';
 
     visualizer.setAttribute('data-main', datamain);
     visualizer.setAttribute('src', requirejs);
