@@ -3,7 +3,6 @@
 const { parseArgs } = require('node:util');
 const makeVisualizerPage = require('../src/makeVisualizerPage');
 const { writeFileSync } = require('node:fs');
-const assert = require('node:assert');
 const fs = require('node:fs');
 
 let argv = process.argv.slice(2);

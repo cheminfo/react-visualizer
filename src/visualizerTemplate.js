@@ -36,7 +36,7 @@ window.onload = function () {
   const queryType = '{{ queryType }}';
   const query = queryType === 'fragment' ? window.location.hash : window.location.search;
   const search = new URLSearchParams(query.startsWith("#") ? query.slice(1) : query);
-  const viewURL = search.get('viewURL');
+  const viewURL = search.get('viewURL') || '{{ viewURL }}';
   const v = search.get('v');
   const loadversion = search.get('loadversion') || '{{ loadversion }}';
   const fallbackVersion = search.get('fallbackVersion') || '{{ fallbackVersion }}';
@@ -74,8 +74,14 @@ window.onload = function () {
 
   function addVisualizer(version) {
     const cdn = '{{ cdn }}';
-    const viewURL = '{{ viewURL }}';
-    const configURL = '{{ configURL }}';
+    let configURL = '';
+    const config = {{ config }};
+    if(typeof config === 'string') {
+      configURL = config;
+    } else if(typeof config === 'object' && config !== null) {
+      configURL = createBlobConfig(config);
+    }
+    
     const visualizer = document.createElement('script');
     const datamain = cdn + '/' + version + '/init';
     const requirejs = cdn + '/' + version + '/components/requirejs/require.js';
@@ -92,6 +98,26 @@ window.onload = function () {
     }
     visualizer.setAttribute('src', requirejs);
     document.head.appendChild(visualizer);
+  }
+  
+  function createBlobConfig(config) {
+    if (typeof config === 'object' && config !== null) {
+      let processedConfig = config;
+      if (config.header?.elements) {
+        processedConfig = structuredClone(config);
+        const elements = processedConfig.header.elements;
+        for (let i = 0; i < elements.length; i++) {
+          // Transform relative URLs to absolute urls using the parent's location
+          // Parent points to self if called on the top window
+          if (elements[i].url) elements[i].url = new URL(elements[i].url, window.parent.location.href).href;
+        }
+      }
+      const configJson = JSON.stringify(processedConfig);
+      return URL.createObjectURL(
+        new Blob([configJson], { type: 'application/json' }),
+      );
+    }
+    return null;
   }
 
   async function fetchUrl(url) {

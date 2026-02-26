@@ -7,7 +7,7 @@
     "elements": [
       {
         "type": "versionselector",
-        "label": "Switch version",
+        "label": "URL config",
         "url": "https://www.lactame.com/visualizer/versions.json",
         "minVersion": "2.155.0"
       }

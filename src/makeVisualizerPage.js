@@ -8,7 +8,7 @@ const template = require('./visualizerTemplate');
  * @property {string} fallbackVersion - Fallback version of the visualizer to use if it is not specified in the serach params and not loaded from the view.
  * @property {'exact' | 'latest-major' | 'none'} loadversion - How to load the visualizer version based on the version of the view. 'exact': load exactly the version of the view. 'major-latest': use the major version of the view, but its latest version. undefined: do not use the view to decide which version to load.
  * @property {string} viewURL - URL to pass to the visualizer's data-ci-view attribute.
- * @property {string} configURL - URL to pass to the visualizer's data-ci-config attribute.
+ * @property {string} config - URL or object (transformed to Blob URL) to pass as the visualizer's data-ci-config attribute.
  * @property {'fragment' | 'query'} queryType - Wether to use a regular query string or to put the query string in a fragment.
  * @property {Array<{url: string}|{content: string}>} scripts - Scripts content or url to inject into the page.
  */
@@ -23,11 +23,17 @@ function makeVisualizerPage(options = {}) {
     fallbackVersion = 'latest',
     queryType = 'fragment',
     loadversion = 'none',
-    configURL = '',
+    config = '',
     viewURL = '',
     scripts = [],
   } = options;
 
+  let configTemplate = '';
+  if (typeof config === 'string') {
+    configTemplate = `'${config}'`;
+  } else if (typeof config === 'object' && typeof config !== null) {
+    configTemplate = JSON.stringify(config);
+  }
   validateQueryType(queryType);
   validateLoadVersion(loadversion);
   const scriptsStr = scripts.reduce(function (value, script) {
@@ -46,8 +52,8 @@ function makeVisualizerPage(options = {}) {
     .replace('{{ scripts }}', scriptsStr)
     .replace('{{ queryType }}', queryType)
     .replace('{{ loadversion }}', loadversion)
-    .replace('{{ configURL }}', configURL)
-    .replace('{{ viewURL }}', viewURL);
+    .replace('{{ viewURL }}', viewURL)
+    .replace('{{ config }}', configTemplate);
 }
 
 module.exports = makeVisualizerPage;

@@ -25,9 +25,7 @@ function relativeUrl(from, to) {
 function Visualizer(props) {
   const currentHref = window.location.href;
 
-  let viewURL = props.viewURL || '';
-  let dataURL = props.dataURL || '';
-  let config = props.config || '';
+  let { viewURL, dataURL, config } = props;
 
   if (viewURL) {
     viewURL = relativeUrl(currentHref, viewURL);
@@ -36,23 +34,8 @@ function Visualizer(props) {
     dataURL = relativeUrl(currentHref, dataURL);
   }
 
-  if (typeof config === 'object' && config !== null) {
-    if (config.header && config.header.elements) {
-      config = JSON.parse(JSON.stringify(config));
-      const els = config.header.elements;
-      for (let i = 0; i < els.length; i++) {
-        if (els[i].url) els[i].url = relativeUrl(currentHref, els[i].url);
-      }
-    }
-    const configJson = JSON.stringify(config);
-    if (!configs.has(configJson))
-      configs.set(
-        configJson,
-        URL.createObjectURL(
-          new Blob([configJson], { type: 'application/json' }),
-        ),
-      );
-    config = configs.get(configJson);
+  if (typeof config !== 'string') {
+    const config = createBlobConfig(config);
   }
 
   const style = props.style || {
@@ -83,6 +66,28 @@ function Visualizer(props) {
       style={style}
     />
   );
+}
+
+function createBlobConfig(config) {
+  if (typeof config === 'object' && config !== null) {
+    let processedConfig = config;
+    if (config.header?.elements) {
+      processedConfig = structuredClone(config);
+      const els = processedConfig.header.elements;
+      for (let i = 0; i < els.length; i++) {
+        if (els[i].url) els[i].url = relativeUrl(currentHref, els[i].url);
+      }
+    }
+    const configJson = JSON.stringify(processedConfig);
+    if (configs.has(configJson)) {
+      return configs.get(configJson);
+    }
+    const blob = URL.createObjectURL(
+      new Blob([configJson], { type: 'application/json' }),
+    );
+    configs.set(configJson, blob);
+  }
+  return null;
 }
 
 module.exports = React.memo(Visualizer);
