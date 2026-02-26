@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.1.1](https://github.com/cheminfo/react-visualizer/compare/v5.1.0...v5.1.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* init scriptUrl if not specified ([c95bf3c](https://github.com/cheminfo/react-visualizer/commit/c95bf3c2b770c3daa7eae89d2913479bad27ae91))
+
 ## [5.1.0](https://github.com/cheminfo/react-visualizer/compare/v5.0.1...v5.1.0) (2026-02-26)
 
 
