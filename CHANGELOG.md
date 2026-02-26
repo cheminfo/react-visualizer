@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.0](https://github.com/cheminfo/react-visualizer/compare/v5.1.1...v5.2.0) (2026-02-26)
+
+
+### Features
+
+* add viewURL and configURL to makeVisualizerPage ([2649331](https://github.com/cheminfo/react-visualizer/commit/26493316bfb1d78c09cb33c9469ba12c48709b0c))
+
 ## [5.1.1](https://github.com/cheminfo/react-visualizer/compare/v5.1.0...v5.1.1) (2026-02-26)
 
 
