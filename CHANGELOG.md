@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.2.1](https://github.com/cheminfo/react-visualizer/compare/v5.2.0...v5.2.1) (2026-02-26)
+
+
+### Bug Fixes
+
+* add ci- attributes to the right element ([1cf9991](https://github.com/cheminfo/react-visualizer/commit/1cf9991f5e47fc6e3dc7ba5ac257c6101cbf8d09))
+
 ## [5.2.0](https://github.com/cheminfo/react-visualizer/compare/v5.1.1...v5.2.0) (2026-02-26)
 
 
