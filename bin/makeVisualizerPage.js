@@ -107,6 +107,8 @@ Options:
       Default: query
       
   --config <string>
-      Path to configuration file. Via the configuration file, you can specify additional options like: "scripts". See "makeVisualizerPage" API.
+      Path to a configuration file.
+      Via the configuration file, you can specify additional options which should be passed to makeVisualizerPage generator.
+      The "out" parameter must always be specified via the command line options.
 `);
 }

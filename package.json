@@ -10,8 +10,9 @@
     "build": "esbuild 'src/*' 'bin/*' --outdir=dist",
     "prettier": "prettier --check .",
     "prettier-write": "prettier --write .",
-    "watch-test": "esbuild test/app.js --bundle --outfile=test/built.js --watch",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "test": "npm run prettier",
+    "watch-test": "esbuild test/app.js --bundle --outfile=test/built.js --watch"
   },
   "repository": {
     "type": "git",
