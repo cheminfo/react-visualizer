@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.1.0](https://github.com/cheminfo/react-visualizer/compare/v5.0.1...v5.1.0) (2026-02-26)
+
+
+### Features
+
+* --scriptUrl CLI option added and --config to specify options via a JSON file ([ed181cb](https://github.com/cheminfo/react-visualizer/commit/ed181cb5ab9b9c45e39a71191837aaf3bbcadf5d))
+* --scriptUrl CLI option added and --config to specify options via a JSON file ([d1a96a8](https://github.com/cheminfo/react-visualizer/commit/d1a96a8d8ab30135dcae79096a4ba12c39607b8c))
+
 ## [5.0.1](https://github.com/cheminfo/react-visualizer/compare/v5.0.0...v5.0.1) (2026-02-26)
 
 
