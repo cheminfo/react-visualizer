@@ -13,6 +13,7 @@ const html = makeVisualizerPage({
   ],
   fallbackVersion: 'latest',
   loadversion: 'exact',
+  queryType: 'query',
 });
 
 fs.writeFileSync(__dirname + '/visualizer.html', html);

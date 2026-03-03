@@ -62,6 +62,7 @@ class OldVisualizer extends React.PureComponent {
         viewURL={viewURL}
         dataURL={dataURL}
         config={config}
+        queryType="fragment"
         queryParameters={queryParameters}
         style={style}
       />

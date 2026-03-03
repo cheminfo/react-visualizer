@@ -26,9 +26,11 @@ const oldElement = React.createElement(OldVisualizer, {
 
 const newElement = React.createElement(Visualizer, {
   url: 'visualizer.html',
+  queryType: 'query',
   queryParameters: {
     // Add key-value query parameters here to test the override of build parameters.
     // v: 'v2.150.0',
+    loadversion: 'latest-major',
   },
   viewURL:
     'https://couch.cheminfo.org/cheminfo-public/16e029673e68d05b6df709e2970dbdc5/view.json',

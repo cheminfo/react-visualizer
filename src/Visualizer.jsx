@@ -10,7 +10,8 @@ function relativeUrl(from, to) {
 
 /**
  * @typedef {Object} VisualizerProps
- * @property {string} url - The URL of the visualizer iframe.
+ * @property {string} url - The URL of the visualizer iframe. Expected no to have any query parameters or hash string.
+ * @property {'query' | 'fragment'} queryType - How to pass query options to the visualizer iframe. Can be as a regular query search string, or as a search string in the url fragment.
  * @property {string} viewURL - The view to load. Set as a query param on the visualizer iframe URL.
  * @property {string} dataURL - The view to load. Set as a query param on the visualizer iframe URL.
  * @property {Object} config - The visualizer config object. URLs in the object are normalized to be absolute. Serialized as JSON and converted to a blob URL which is passed as a query param to the visualizer iframe URL.
@@ -25,7 +26,7 @@ function relativeUrl(from, to) {
 function Visualizer(props) {
   const currentHref = window.location.href;
 
-  let { viewURL, dataURL, config } = props;
+  let { viewURL, dataURL, config, queryType = 'fragment', url } = props;
 
   if (viewURL) {
     viewURL = relativeUrl(currentHref, viewURL);
@@ -62,7 +63,7 @@ function Visualizer(props) {
   return (
     <iframe
       allowFullScreen
-      src={props.url + '#?' + search.toString()}
+      src={`${url}${queryType === 'fragment' ? '#' : ''}?` + search.toString()}
       style={style}
     />
   );

@@ -31,7 +31,7 @@ window.onload = function () {
     return v;
   }
   
-  const queryType = 'fragment';
+  const queryType = 'query';
   const query = queryType === 'fragment' ? window.location.hash : window.location.search;
   const search = new URLSearchParams(query.startsWith("#") ? query.slice(1) : query);
   const viewURL = search.get('viewURL') || '';
