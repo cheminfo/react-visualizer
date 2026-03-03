@@ -1,5 +1,12 @@
 # Changelog
 
+## [5.4.0](https://github.com/cheminfo/react-visualizer/compare/v5.3.0...v5.4.0) (2026-03-03)
+
+
+### Features
+
+* add option on Visualizer component to pass query parameters to search string rather than hash of the url ([da10af7](https://github.com/cheminfo/react-visualizer/commit/da10af7a84ec3f3faab744f17de7680c500349fb))
+
 ## [5.3.0](https://github.com/cheminfo/react-visualizer/compare/v5.2.1...v5.3.0) (2026-02-26)
 
 
